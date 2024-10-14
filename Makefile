@@ -9,7 +9,11 @@ VMLINUX := vmlinux.h
 
 TARGETS := $(addprefix $(OUTPUT)/,$(patsubst %.bpf.c,%.bpf.o,$(wildcard *.bpf.c)))
 
-BPF_CFLAGS := -g -target bpf -c 
+#
+# Need target arch for using the correct bpf function parameters via ctx. 
+#
+
+BPF_CFLAGS := -g -O2 -target bpf -c -D__TARGET_ARCH_x86
 
 .PHONY: all clean distclean
 
